@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <NavBar/>
       </header>
       <body>
-        <h2 className='bodyPlaceholder'>Página en construcción.</h2>
+        <ItemListContainer greeting='Página en construcción'/>
       </body>
     </div>
   );
