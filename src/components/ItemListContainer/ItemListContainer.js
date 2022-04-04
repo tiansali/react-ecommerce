@@ -1,8 +1,12 @@
 import './ItemListContainer.css'
+import CounterPrototype from '../CounterPrototype/CounterPrototype'
 
 const ItemListContainer = (props) => {
     return(
-        <h2 className='ItemListContainer_placeholder'>{props.greeting}</h2>
+        <div>
+            <h2 className='ItemListContainer_placeholder'>{props.greeting}</h2>
+            <CounterPrototype stock={5} initial={0} onAdd={1}/>
+        </div>
     )
 }
 
