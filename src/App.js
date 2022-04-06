@@ -10,7 +10,7 @@ function App() {
         <NavBar/>
       </header>
       <main>
-        <ItemListContainer greeting='Página en construcción'/>
+        <ItemListContainer greeting='Async load mock'/>
       </main>
     </div>
   );

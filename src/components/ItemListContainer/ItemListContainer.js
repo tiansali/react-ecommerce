@@ -1,11 +1,23 @@
+// import CounterPrototype from '../CounterPrototype/CounterPrototype'
 import './ItemListContainer.css'
-import CounterPrototype from '../CounterPrototype/CounterPrototype'
+import { useState, useEffect } from 'react'
+import { getProducts } from '../../asyncmock'
+import ItemList from '../ItemList/ItemList'
 
 const ItemListContainer = (props) => {
+    const [products, setProducts] = useState([])
+    
+    useEffect(() => {
+        getProducts().then(prods => {
+            setProducts(prods)
+        })
+        // .then(() => {console.log(products)})
+    }, [])
+
     return(
         <div>
             <h2 className='ItemListContainer_placeholder'>{props.greeting}</h2>
-            <CounterPrototype stock={5} initial={0} onAdd={1}/>
+            <ItemList products={products} />
         </div>
     )
 }
