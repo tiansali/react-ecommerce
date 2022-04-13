@@ -1,3 +1,8 @@
+a, a:visited, a:active {
+    text-decoration: none;
+    color: white;
+}
+
 .NavBar{
     width: 100%;
     display: flex;
@@ -29,7 +34,7 @@
     cursor: pointer;
 }
 
-.NavBar_accent {
+a.NavBar_accent, .NavBar_accent {
     background-color: white;
     color: rgba(0, 0, 0, 0.842);
     border-radius: 1em;
