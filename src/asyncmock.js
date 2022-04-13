@@ -27,40 +27,40 @@ const products = [
         id: '4',
         name: 'Alfajores de Harina de Almendras con baño mixto',
         img: 'https://mamuschka-choco.animusargentina.com/uploads/big_2f79f5b76fae50fdc848b53b90e2be27.jpg',
-        description: '',
-        price: 0,
+        description: 'Caja 6 alfajores dulce de leche con baño mixto: Chocolate con leche y chocolate Semiamargo 63% / El alfajor más rico y sano. Elaborado a partir de almendras enteras con baño de nuestro chocolate con leche Bean to Bar.',
+        price: 930,
         categories: ['alfajores']
     },
     {
         id: '5',
         name: 'Ositos en Caja Tableta Leche rellena de MamuschCream con Avellanas',
         img: 'https://mamuschka-choco.animusargentina.com/uploads/big_9cb6b4fe70cda41e5538d80695c4f9a5.jpg',
-        description: '',
-        price: 0,
+        description: 'Bombones con forma de ositos, de chocolate con leche rellenos de Dulce de leche, y de chocolate blanco rellenos con crema de avellanas Mamuschcream, 108 gr Chocolate Bean to Bar, sin TACC. Producto Apto celiacos. Nuevo envase tipo estuche de cartón, evitando el uso del plástico y pensado para más de un uso (caja, para guardar cosas, cartuchera para el cole, etc.)',
+        price: 680,
         categories: ['bombones']
     },
     {
         id: '6',
         name: 'Tableta 70% Cacao con Frutos Secos',
         img: 'https://mamuschka-choco.animusargentina.com/uploads/big_717636bf7aacd84822e81d8ce5e581e7.jpg',
-        description: '',
-        price: 0,
+        description: 'Chocolate 70% Cacao Origen Amazonía Ecuatoriana, Proceso "Bean to Bar". Con frutos secos seleccionados por Mamuschka. Incrustaciones de avellanas cubeteadas, almendras tostadas, pistachos tostados, arándanos. Sin TACC. Apto Celíacos. Peso neto 75 grs.',
+        price: 650,
         categories: ['tabletas']
     },
     {
         id: '7',
         name: 'Tableta 85% Cacao con Almendras enteras y tostadas',
         img: 'https://mamuschka-choco.animusargentina.com/uploads/big_4837e61376d717b2416ea17fa686cb77.jpg',
-        description: '',
-        price: 0,
+        description: 'Chocolate 85% Cacao de origen Amazonía Ecuatoriana, Proceso "Bean to Bar", con almendras enteras seleccionadas tostadas por Mamuschka. Sin TACC. Apto celíacos. En ausencia de derivados de origen animal esta tableta es apta para veganos. Peso neto 75 grs.',
+        price: 580,
         categories: ['tabletas']
     },
     {
         id: '8',
         name: 'Lata 5 Corazones',
         img: 'https://mamuschka-choco.animusargentina.com/uploads/big_c68e8a7d9ef69d662705885371cc3801.jpg',
-        description: '',
-        price: 0,
+        description: 'Lata 5 Corazones, tapas con distintos motivos, coleccionables. Contiene corazones de leche y blanco, rellenos con dulce de leche Mamuschka. Todos nuestros chocolates con leche, semi amargos y amargos son elaborados a partir de granos de cacao de origen en nuestra fábrica de Bariloche y son Sin Tacc.',
+        price: 820,
         categories: ['bombones']
     }
 ]
