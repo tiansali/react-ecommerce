@@ -11,8 +11,6 @@ function App() {
       <BrowserRouter>
         <header className="App-header">
           <NavBar/>
-          {/* <Link to='/list'>Lista </Link>
-          <Link to='/detail'>Detalle</Link> */}
         </header>
         <Routes>
           <Route path='/' element={<ItemListContainer/>}/>
