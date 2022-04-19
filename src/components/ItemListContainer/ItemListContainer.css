@@ -29,7 +29,8 @@
     transform: translateX(-50%);
 }
 
-.Item h3 {
+.Item h3,
+.Item span {
     padding: 0 1rem;
 }
 

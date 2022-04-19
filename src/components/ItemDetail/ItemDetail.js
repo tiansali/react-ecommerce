@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState, useContext } from 'react'
+import CartContext from '../../CartContext/CartContext'
 import ItemCounter from '../ItemCounter/ItemCounter'
 
 const ItemDetail = props => {
@@ -7,12 +8,14 @@ const ItemDetail = props => {
     const navigate = useNavigate()
     const [itemCount, setItemCount] = useState(0)
 
+    const { addItem, getItemQuantity } = useContext(CartContext)
+
     const handleCounter = (count) => {
         setItemCount(count)
-        console.log(count)
+        addItem({...prod, quantity: count})
     }
 
-    if (props.product.name) {
+    if (prod.name) {
         return(
             <div className="ItemDetail">
                 <div className="ItemDetail_imgContainer">
@@ -24,7 +27,7 @@ const ItemDetail = props => {
                 </div>
                 <p>{prod.description}</p>
                 <div className="ItemDetail_footerContainer">
-                    <ItemCounter initial={0} stock={10} onAdd={handleCounter}/>
+                    <ItemCounter initial={getItemQuantity(prod.id)} stock={10} onAdd={handleCounter}/>
                     <span onClick={() => navigate(-1)} className="ItemDetail_button">CONTINUAR</span>
                 </div>
             </div>
