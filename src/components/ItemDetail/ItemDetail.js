@@ -27,7 +27,7 @@ const ItemDetail = props => {
                 </div>
                 <p>{prod.description}</p>
                 <div className="ItemDetail_footerContainer">
-                    <ItemCounter initial={getItemQuantity(prod.id)} stock={10} onAdd={handleCounter}/>
+                    <ItemCounter initial={getItemQuantity(prod.id)} stock={prod.stock} onAdd={handleCounter}/>
                     <span onClick={() => navigate(-1)} className="ItemDetail_button">CONTINUAR</span>
                 </div>
             </div>

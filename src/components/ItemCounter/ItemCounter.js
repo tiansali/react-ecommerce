@@ -3,8 +3,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CounterPrototype = (props) => {
+   
     const [state, setCount] = useState({count: props.initial, stock: props.stock})
-
+    
     const increment = () => {
         if (state.count < state.stock) {
             setCount({...state, count: state.count + 1})
