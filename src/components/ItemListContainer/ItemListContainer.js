@@ -1,29 +1,28 @@
-// import CounterPrototype from '../CounterPrototype/CounterPrototype'
 import './ItemListContainer.css'
-import { useState, useEffect } from 'react'
-// import { getCategory, getProducts } from '../../asyncmock'
-import { getDocs, collection, query, where } from 'firebase/firestore'
-import { firestoreDb } from '../../services/firebase'
 import ItemList from '../ItemList/ItemList'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { getProducts } from '../../services/firebase/firestore'
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
     const [products, setProducts] = useState([])
     const { categoryId } = useParams()
 
+    let isActive = true
+
     useEffect(() => {
-        // getProducts(categoryId).then(list => setProducts(list))
-        const collectionRef = categoryId
-            ? query(collection(firestoreDb, 'products'), where('categories', 'array-contains', categoryId))
-            : collection(firestoreDb, 'products')
-
-        getDocs(collectionRef).then(response => {
-            const products = response.docs.map(doc => {
-                return {id: doc.id, ...doc.data()}
+        getProducts(categoryId)
+            .then(productsList => {
+                if(isActive) {
+                    setProducts(productsList)
+                }
+            }).catch(error => {
+                console.log(error)
             })
-            setProducts(products)
-        })
-
+        
+        return () => {
+            isActive = false
+        }
     }, [categoryId])
 
     return(
