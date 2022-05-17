@@ -14,7 +14,7 @@ A su vez, hay una seccion de usuario (sin autenticacion ni persistencia) donde s
 Solo se podra enviar la orden de compra una vez que haya elementos en el carrito y el usuario tenga, al menos, un primer nombre.
 Por ultimo, se envia la orden de compra a Firestore y se muestra toda la informacion de la misma en una pagina de checkout.
 
-![GIF de demostracion](.\react-ecommerce-demo.gif)
+![GIF de demostracion](https://github.com/tiansali/react-ecommerce/blob/master/react-ecommerce-demo.gif)
 
 
 ## Instalacion
