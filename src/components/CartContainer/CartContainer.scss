@@ -1,0 +1,20 @@
+.cartMessage {
+    text-align: center;
+    
+        &__title {
+        font-size: 1.25rem;
+        padding: 5rem 0 2rem 0;
+        }
+        &__cta {
+            color: rgb(212, 0, 46);
+            border: 1px solid rgb(212, 0, 46);
+            border-radius: 0.2rem;
+            padding: 0.6em 1em;
+            font-size: 1.15rem;
+
+            &:hover {
+                background-color: rgb(212, 0, 46);
+                color: white;
+            }
+        }
+}

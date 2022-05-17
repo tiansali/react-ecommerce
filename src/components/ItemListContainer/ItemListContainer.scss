@@ -1,0 +1,62 @@
+.ItemListContainer {
+    overflow: hidden;
+    padding-bottom: 6rem;
+}
+
+.ItemList {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__Item {
+        position: relative;
+        width: 20rem;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 0.2em;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__img {
+            height: 15rem;
+            border-bottom: 1px solid #ffd8d3;
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+        &__title {
+            font-size: 1rem;
+        }
+        &__title,
+        &__description {
+            padding: 0 1rem;
+        }
+        &__inCart {
+            position: absolute;
+            top: 12.5rem;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 0 0.2rem 0.2rem 0;
+            background-color: rgb(215, 39, 39);
+            color: white;
+        }
+        &__btn {
+            width: 100%;
+            text-align: center;
+            font-family: 'Comfortaa', cursive;
+            color: rgb(212, 0, 46);
+            background-color: white;
+            border: 1px solid rgb(212, 0, 46);
+            border-radius: 0 0 0.2rem 0.2rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            
+            &:hover {
+                color: white;
+                background-color: rgb(212, 0, 46);
+            }
+        }
+    }
+}

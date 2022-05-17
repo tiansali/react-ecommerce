@@ -1,29 +1,32 @@
-import './NavBar.css'
-import CartWidget from '../CartWidget/CartWidget'
-import { getDocs, collection } from 'firebase/firestore'
-import { firestoreDb } from '../../services/firebase'
-import { useState, useEffect } from 'react'
+import './NavBar.scss'
+import { useState, useEffect, useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { getCategories } from '../../services/firebase/firestore'
+import UserContext from '../../UserContext/UserContext'
+import NotificationContext from '../../NotificationContext/NotificationContext'
 
 const NavBar = () => {
-    const setClass = x => x ? 'NavBar_menu_item NavBar_accent' : 'NavBar_menu_item'
+    const setClass = isActive => isActive ? 'NavBar__menu__item NavBar--accent' : 'NavBar__menu__item'
     const [ categories, setCategories ] = useState([])
+    const { checkForUser } = useContext(UserContext)
+    const { setNotification } = useContext(NotificationContext)
 
     useEffect(() => {
-        getDocs(collection(firestoreDb, 'categories')).then(response => {
-            const categories = response.docs.map(doc => {
-                return { id: doc.id, ...doc.data() }
+        getCategories()
+            .then(categoriesList => {
+                setCategories(categoriesList)
+            }).catch(error => {
+                console.log(error)
+                setNotification('Problema con la base de datos, no se pudieron cargar las categorias del menu de navegacion', 'red')
             })
-            setCategories(categories)
-        })
-    }, [categories])
+    }, [])
 
     return (
         <nav className='NavBar'>
             <Link to='/'>
-                <img src={'../images/mamushcka-logo.svg'} alt='Mamushcka' className='NavBar_logo'/>
+                <img src={'../images/mamushcka-logo.svg'} alt='Mamushcka' className='NavBar__logo'/>
             </Link>
-            <div className='NavBar_menu'>
+            <ul className='NavBar__menu'>
                 <NavLink to='/' className={({isActive}) => setClass(isActive)}>Inicio</NavLink>
                 {categories.map(category => {
                     return( <NavLink 
@@ -33,9 +36,8 @@ const NavBar = () => {
                                 {category.description}
                             </NavLink>)
                 })}
-            </div>
-            <CartWidget/>
-            <span className='NavBar_login'>Login</span>
+            </ul>
+            <Link to={'/user'} className='NavBar__login'>{checkForUser() ? checkForUser() : 'Login'}</Link>
         </nav>
     )
 }

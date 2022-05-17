@@ -4,15 +4,25 @@ import CartContext from '../../CartContext/CartContext'
 
 const Item = (prod) => {
     const { getItemQuantity } = useContext(CartContext)
+    const itemQuantityInCart = getItemQuantity(prod.id)
+    
+    const shortenDescription = (fullDescription, newLenght) => {
+        const newDescription = fullDescription.slice(0, newLenght)
+        return `${newDescription}...`
+    }
 
     return(
-        <li className="Item">
+        <li className="ItemList__Item">
             <div>
-                <img src={prod.img}/>
-                <h3>{prod.name}</h3>
-                {getItemQuantity(prod.id) > 0 ? <span>{getItemQuantity(prod.id)} en carrito.</span> : null}
+                <img className='ItemList__Item__img' src={prod.img}/>
+                {itemQuantityInCart > 0
+                    ? <span className='ItemList__Item__inCart'>{itemQuantityInCart} en carrito.</span>
+                    : null
+                }
+                <h3 className='ItemList__Item__title'>{prod.name}</h3>
+                <p className='ItemList__Item__description'>{shortenDescription(prod.description, 60)}</p>
             </div>
-            <Link className='button' to={`/item/${prod.id}`}>Ver detalle</Link>
+            <Link className='ItemList__Item__btn' to={`/item/${prod.id}`}>Ver detalle</Link>
         </li>     
     )
 }

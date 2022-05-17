@@ -1,0 +1,42 @@
+.Form {
+    width: 20rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__label,
+    &__input {
+        display: block;
+        width: 100%;
+        margin-top: 0.2rem;
+        padding: 0.3rem;
+        font-size: 1rem;
+
+        &--submit,
+        &--logOut {
+            background: none;
+            border: solid 1px;
+            border-radius: 0.2rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+        }
+        &--submit {
+            border-color: rgb(212, 0, 46);
+            color: rgb(212, 0, 46);
+
+            &:hover {
+                background-color: rgb(212, 0, 46);
+            }
+        }
+        &--logOut{
+            &:hover {
+                background-color: #222;
+            }
+        }
+    }
+}

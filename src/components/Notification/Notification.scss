@@ -1,0 +1,15 @@
+.Notification {
+    position: fixed;
+    right: 0;
+    top: 4.5rem;
+    z-index: 999;
+    max-width: 25rem;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.3rem 0 0 0.3rem;
+
+    &__message {
+        margin: 0;
+        line-height: 1.4;
+    }
+}

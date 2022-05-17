@@ -1,34 +1,35 @@
-import { useNavigate } from 'react-router-dom'
-import { useState, useContext } from 'react'
-import CartContext from '../../CartContext/CartContext'
 import ItemCounter from '../ItemCounter/ItemCounter'
+import CartContext from '../../CartContext/CartContext'
+import NotificationContext from '../../NotificationContext/NotificationContext'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ItemDetail = props => {
     const prod = props.product
     const navigate = useNavigate()
-    const [itemCount, setItemCount] = useState(0)
+    const { setNotification } = useContext(NotificationContext)
 
     const { addItem, getItemQuantity } = useContext(CartContext)
 
-    const handleCounter = (count) => {
-        setItemCount(count)
-        addItem({...prod, quantity: count})
+    const handleCounter = (itemCount, incrementCheck) => {
+        addItem({...prod, quantity: itemCount})
+        incrementCheck && setNotification(`Se agregaron productos al carrito`, 'green')
     }
 
     if (prod.name) {
         return(
             <div className="ItemDetail">
-                <div className="ItemDetail_imgContainer">
-                    <img src={prod.img}/>
+                <div className="ItemDetail__imgContainer">
+                    <img className="ItemDetail__imgContainer__img" src={prod.img}/>
                 </div>
-                <div className="ItemDetail_header">
-                    <h3>{prod.name}</h3>
-                    <span>${prod.price}</span>
+                <div className="ItemDetail__header">
+                    <h3 className="ItemDetail__header__title">{prod.name}</h3>
+                    <span className="ItemDetail__header__price">${prod.price}</span>
                 </div>
-                <p>{prod.description}</p>
-                <div className="ItemDetail_footerContainer">
+                <p className="ItemDetail__description">{prod.description}</p>
+                <div className="ItemDetail__footerContainer">
                     <ItemCounter initial={getItemQuantity(prod.id)} stock={prod.stock} onAdd={handleCounter}/>
-                    <span onClick={() => navigate(-1)} className="ItemDetail_button">CONTINUAR</span>
+                    <span onClick={() => navigate(-1)} className="ItemDetail__button ItemDetail__button--continue">CONTINUAR</span>
                 </div>
             </div>
         )

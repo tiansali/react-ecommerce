@@ -1,105 +1,44 @@
-import './Cart.css'
-import { useContext, useState } from 'react'
+import './Cart.scss'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
 import CartContext from '../../CartContext/CartContext'
-import ItemCounter from '../ItemCounter/ItemCounter'
-import { getDocs, writeBatch, query, where, collection, documentId, addDoc } from 'firebase/firestore'
-import { firestoreDb } from '../../services/firebase'
 
-const Cart = () => {
-    const [loading, setLoading] = useState(false)
-
-    const { cart, getTotalPrice, removeItem, addItem, clearCart } = useContext(CartContext)
-
-    
-    const createOrder = () => {
-        setLoading(true)
-        const objOrder = {
-            items: cart,
-            buyer: {
-                name: 'John Doe',
-                phone: '0800666000',
-                email: 'johndoe@gmail.com'
-            },
-            total: getTotalPrice(),
-            date: new Date()
-        }
-        
-        const ids = cart.map(prod => prod.id)
-
-        const batch = writeBatch(firestoreDb)
-
-        const collectionRef = collection(firestoreDb, 'products')
-
-        const outOfStock = []
-
-        getDocs(query(collectionRef, where(documentId(), 'in', ids)))
-            .then(response => {
-                // Chequea que todos los productos tengan stock
-                response.docs.forEach(doc => {
-                    const dataDoc = doc.data()
-                    const prodQuantity = cart.find(prod => prod.id === doc.id).quantity
-
-                    if(dataDoc.stock >= prodQuantity) {
-                        batch.update(doc.ref, { stock: dataDoc.stock - prodQuantity})
-                    } else {
-                        outOfStock.push({id: doc.id, ...dataDoc})
-                    }
-                })
-            }).then(() => {
-                // Agrega la orden de compra a la base de datos
-                if(outOfStock.length === 0) {
-                    const collectionRef = collection(firestoreDb, 'orders')
-                    return addDoc(collectionRef, objOrder)
-                } else {
-                    return Promise.reject({name: 'outOfStockError', products: outOfStock})
-                }
-            }).then(({id}) => {
-                // Actualiza el stock de todos los productos en la orden de compra
-                batch.commit()
-                console.log(`El id de la orden es: ${id}`)
-            }).catch(error => {
-                console.log(error)
-            }).finally(() => {
-                setLoading(false)
-            })
-    }
-
-    if (loading) {
-        return <h1>Se esta generando su orden</h1>
-    }
-
-    if (cart.length === 0) {
-        return(
-            <div className='cartMessageContainer'>
-                <h2>El carrito esta vacio</h2>
-                <Link to='/'>Vuelve al inicio</Link>
-            </div>
-        )
-    }
+const Cart = (props) => {
+    const { getTotalPrice, removeItem, clearCart } = useContext(CartContext)
+    const cart = props.cart
+    const editable = props.editable
 
     return(
         <ul className='Cart'>
             {cart.map(prod => {
                 return(
-                    <li key={prod.id}>
+                    <li className='Cart__item' key={prod.id}>
                         <div className='leftColumn'>
-                            <button className='delete' onClick={() => removeItem(prod.id)}>x</button>
-                            {prod.quantity}x {prod.name}
+                            {editable
+                                ? <button className='leftColumn__delete' onClick={() => removeItem(prod.id)}>x</button>
+                                : null
+                            }
+                            {editable
+                                ? <Link to={`/item/${prod.id}`} className='leftColumn__title'>{prod.name}</Link>
+                                : <span className='leftColumn__title'>{prod.name}</span>
+                            }
                         </div>
-                        <div className='priceColumn'>
-                            <span className='unitary'>${prod.price}/u.</span>
-                            <span className='subtotal'>${prod.price*prod.quantity}</span>
+                        <div className='rightColumn'>
+                            <span className='rightColumn__quantity'>{prod.quantity}<i>/u. x</i></span>
+                            <span className='rightColumn__unitary'>${prod.price}<i>/u.</i></span>
+                            <span className='rightColumn__subtotal'>${prod.price*prod.quantity}</span>
                         </div>
                     </li>
                 )
             })}
-            <li className='totalContainer'>
-                <span className='totalTitle'>Total</span>
-                <span className='totalPrice'>${getTotalPrice()}</span>
+            <li className='Cart__total'>
+                <span className='Cart__total__title'>Total</span>
+                <span className='Cart__total__price'>${getTotalPrice()}</span>
             </li>
-            <button onClick={() => clearCart()}>Vaciar carrito</button>
-            <button onClick={() => createOrder()}>Generar orden de compra</button>
+            {editable
+                ? <button className='Cart__clearCartButton' onClick={() => clearCart()}>Vaciar carrito</button>
+                : null
+            }
         </ul>
     )
 }

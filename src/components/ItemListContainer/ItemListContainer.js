@@ -1,4 +1,4 @@
-import './ItemListContainer.css'
+import './ItemListContainer.scss'
 import ItemList from '../ItemList/ItemList'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
@@ -8,12 +8,12 @@ const ItemListContainer = () => {
     const [products, setProducts] = useState([])
     const { categoryId } = useParams()
 
-    let isActive = true
+    let componentIsActive = true
 
     useEffect(() => {
         getProducts(categoryId)
             .then(productsList => {
-                if(isActive) {
+                if(componentIsActive) {
                     setProducts(productsList)
                 }
             }).catch(error => {
@@ -21,12 +21,12 @@ const ItemListContainer = () => {
             })
         
         return () => {
-            isActive = false
+            componentIsActive = false
         }
     }, [categoryId])
 
     return(
-        <div>
+        <div className='ItemListContainer'>
             <ItemList products={products} />
         </div>
     )
