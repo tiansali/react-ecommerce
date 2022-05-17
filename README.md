@@ -43,7 +43,7 @@ Los **productos**, tanto para la vista en mosaico del ItemList como para el Item
 {
 id: '42inNlDRTrM9daOJ9xKK',
 name: 'Lata 7 ositos',
-description: 'Lata 115mm de diámetro. Vienen con motivo de Invierno y Verano. Contiene 7 osos de        chocolate, blancos y leche. Rellenos con dulce de leche Mamuschka.',
+description: 'Lata 115mm de diámetro. Vienen con motivo de Invierno y Verano. Contiene 7 osos de chocolate, blancos y leche. Rellenos con dulce de leche Mamuschka.',
 img: 'https://mamuschka-choco.animusargentina.com/uploads/big_78420254e896b4f7fb754b0b6a6e944d.jpg',
 price: 1370,
 stock: 996
